@@ -1,1 +1,11 @@
+# requirements.txt
 streamlit
+pandas
+numpy
+xarray
+netCDF4
+requests
+plotly
+matplotlib
+python-dateutil
+pytz
