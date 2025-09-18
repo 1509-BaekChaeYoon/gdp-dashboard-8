@@ -60,7 +60,6 @@ st.header("공개 데이터 기반 대시보드 (예시 데이터 사용)")
 
 public_data_notice = st.empty()
 public_warning = True
-public_data_notice.warning("공개 데이터(또는 KMA 접근)에 일부 실패했습니다. 예시(설명 기반) 데이터로 자동 대체하여 시각화합니다. 실제 분석 시 NOAA, ERSST, 기상청 원본 데이터를 연결하세요.")
 
 years = np.arange(2005, 2025)
 dates = pd.to_datetime([f"{y}-07-01" for y in years])
