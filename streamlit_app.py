@@ -132,7 +132,7 @@ with p2:
     st.write("설명: 양(+)의 상관관계가 있음을 입력 텍스트 기반 합성 데이터로 재현함.")
 
 st.subheader("해수면 온도와 폭염일수 산점도")
-fig2 = px.scatter(df_vis, x='sst', y='heatwave_days', trendline="ols",
+fig2 = px.scatter(df_vis, x='sst', y='heatwave_days', trendline=None,
                   labels={'sst':'해수면 온도 (℃)', 'heatwave_days':'연간 폭염일수 (일)'},
                   hover_data=['year'])
 st.plotly_chart(fig2, use_container_width=True)
