@@ -163,119 +163,40 @@ import matplotlib.pyplot as plt
 # 보고서 본문 (접었다 펼 수 있는 구조)
 # -------------------------------
 
-with st.expander("📘 폭염 세대: 잠을 빼앗긴 10대, 벼랑 끝에 서다"):
-    st.subheader("서론 (문제 제기)")
+with st.expander("📑 보고서 내용 (접었다/폈다 가능)"):
+    st.subheader("1. 연구 배경")
     st.write("""
-    최근 들어 지구의 해수 온도는 꾸준히 상승하고 있다. 이는 단순한 해양 환경의 변화가 아니라,
-    대기와 기후 전반에 영향을 미치는 심각한 현상이다. 특히 바닷물의 온도가 높아질수록 대기 중 열에너지가 증가하여
-    여름철 폭염이 더욱 강렬해지고, 그 결과 ‘열대야’라는 새로운 일상이 우리 앞에 등장하게 되었다.
-
-    낮 동안 달궈진 열기는 밤에도 식지 않고 남아, 청소년들의 수면 환경을 위협한다.
-    성장기 청소년에게 필수적인 깊은 수면이 방해받으면, 집중력과 학습 능력은 저하되고,
-    교실에서는 졸음과 피로에 시달리는 학생들이 늘어난다. 단순한 불편함을 넘어,
-    불안과 스트레스, 정서적 불균형까지 초래한다. 결국 폭염은 청소년의 건강·학습·미래를 뒤흔드는 거대한 그림자로 자리 잡고 있다.
+    최근 수년간 여름철 평균 기온이 꾸준히 상승하면서 청소년들의 수면 부족 및 학업 성취도에 영향을 미친다는 연구가 늘어나고 있다.
     """)
 
-# -------------------------------
-# 본론 1-1
-# -------------------------------
-with st.expander("📊 1-1. 폭염과 수면 패턴 변화 상관관계"):
+    # 예시 그래프 1
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    years = np.arange(2015, 2024, 2)
+    temp = [24.1, 24.3, 24.8, 25.2, 25.5]  # 예시 온도 데이터
+    score = [82, 80, 78, 76, 74]           # 예시 성취도 데이터
+
+    fig, ax1 = plt.subplots()
+    ax2 = ax1.twinx()
+
+    ax1.plot(years, temp, marker="o", label="평균 기온(°C)")
+    ax2.plot(years, score, marker="s", color="orange", label="학업 성취도(점수)")
+
+    ax1.set_xlabel("연도")
+    ax1.set_ylabel("평균 기온(°C)")
+    ax2.set_ylabel("성취도(점수)")
+    ax1.set_title("여름철 평균 기온과 청소년 학업 성취도 추이")
+
+    st.pyplot(fig)
+
+    st.subheader("2. 분석 결과")
     st.write("""
-    야간 기온 상승과 청소년 수면 시간의 변화를 분석한 68개국 다국적 연구 결과에 따르면,
-    기온이 높아질수록 수면 시간이 단축되고 수면의 질 역시 저하되는 경향이 확인되었다.
+    - 여름철 평균 기온이 꾸준히 상승하고 있음  
+    - 기온 상승과 동시에 성취도 점수가 하락하는 경향 확인  
     """)
 
-    # 예시 데이터 (기온 vs 수면시간)
-    temp = [22, 24, 26, 28, 30]
-    sleep_hours = [7.5, 7.2, 6.8, 6.3, 5.9]
-
-    fig1 = px.line(
-        x=temp, y=sleep_hours, markers=True,
-        labels={"x":"평균 야간 기온(°C)", "y":"평균 수면 시간(시간)"},
-        title="기온 상승에 따른 청소년 평균 수면 시간 변화"
-    )
-    st.plotly_chart(fig1, use_container_width=True)
-
-# -------------------------------
-# 본론 1-2
-# -------------------------------
-with st.expander("📊 1-2. 청소년 수면 부족 실태와 통계"):
+    st.subheader("3. 결론 및 제언")
     st.write("""
-    대한민국 청소년건강행태온라인조사 결과, 청소년의 70~90%가 권장 수면 시간(8시간 이상)을 확보하지 못하고 있음이 드러났다.
-    """)
-
-    # 예시 데이터 (도넛 차트)
-    labels = ["권장 수면 확보(8시간 이상)", "수면 부족(8시간 미만)"]
-    values = [15, 85]
-
-    fig2 = px.pie(
-        names=labels, values=values, hole=0.4,
-        title="청소년 권장 수면 확보 비율"
-    )
-    st.plotly_chart(fig2, use_container_width=True)
-
-# -------------------------------
-# 본론 2-1
-# -------------------------------
-with st.expander("📊 2-1. 학업 성취도 저하"):
-    st.write("""
-    수면 부족은 집중력과 학습 효율 저하로 이어지며, 장기적으로 학업 성취도의 지속적 하락을 유발한다.
-    """)
-
-    # 예시 데이터 (연도별 기온 vs 성취도)
-    years = [2015, 2017, 2019, 2021, 2023]
-    temp = [24.5, 25.0, 25.6, 26.1, 26.8]
-    achievement = [85, 82, 79, 75, 72]
-
-    fig3 = px.line(
-        x=years, y=[temp, achievement],
-        labels={"x":"연도", "value":"값"},
-        title="여름철 기온 상승과 학업 성취도 변화"
-    )
-    fig3.data[0].name = "평균 여름철 기온(°C)"
-    fig3.data[1].name = "학업 성취도 지수"
-    st.plotly_chart(fig3, use_container_width=True)
-
-# -------------------------------
-# 본론 2-2
-# -------------------------------
-with st.expander("📊 2-2. 건강 악화"):
-    st.write("""
-    수면 부족은 정신적·신체적 건강 모두에 복합적 악영향을 끼친다.
-    """)
-
-    # 예시 데이터 (건강 영향)
-    categories = ["정신 건강(불안/우울)", "면역력 저하", "성장 방해", "비만 위험 증가", "만성질환 위험"]
-    values = [80, 65, 60, 55, 40]
-
-    fig4 = px.bar(
-        x=categories, y=values,
-        labels={"x":"영향 요인", "y":"영향 정도(%)"},
-        title="수면 부족이 청소년 건강에 미치는 영향"
-    )
-    st.plotly_chart(fig4, use_container_width=True)
-
-# -------------------------------
-# 결론 + 제언
-# -------------------------------
-with st.expander("✅ 결론 및 제언"):
-    st.write("""
-    기후 변화로 인한 폭염과 열대야는 더 이상 먼 미래의 이야기가 아니다.  
-    그러나 우리는 데이터로 문제를 밝히고, 작은 실천으로 교실을 바꾸며, 목소리를 모아 정책을 제안할 수 있다.  
-    청소년인 우리가 먼저 시작할 때, 비로소 ‘뜨거운 여름밤’을 이겨내고 안전하고 건강한 미래를 스스로 만들어갈 수 있을 것이다.
-    """)
-
-# -------------------------------
-# 참고 자료
-# -------------------------------
-with st.expander("📚 참고 자료"):
-    st.markdown("""
-    - [한국보건사회연구원 논문](https://www.kihasa.re.kr/hswr/assets/pdf/91/journal-39-1-230.pdf?utm_source=chatgpt.com)  
-    - [Medigate 뉴스](https://medigatenews.com/news/1841034635?utm_source=chatgpt.com)  
-    - [NOAA ERSST 데이터](https://www.ncei.noaa.gov/products/extended-reconstructed-sst)  
-    - [기상청 데이터](https://data.kma.go.kr/resources/html/en/aowdp.html)  
-    - [ScienceDirect 연구](https://www.sciencedirect.com/science/article/pii/S235286741930132X)  
-    - [KoreaScience 논문](https://koreascience.kr/article/JAKO201609633506261.pdf)  
-    - [HealthLife Herald 기사](https://www.healthlifeherald.com/news/articleView.html?idxno=2542)  
-    - [GoodNews1 기사](https://www.goodnews1.com/news/articleView.html?idxno=449373)  
+    기후 변화가 학업 성취도에 간접적 영향을 미칠 수 있으므로, 교육기관 차원에서 여름철 학습 환경 개선(냉방, 수면 관리 교육 등)이 필요하다.
     """)
