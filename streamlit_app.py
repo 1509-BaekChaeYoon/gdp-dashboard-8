@@ -271,3 +271,43 @@ with st.expander("📊 2-2. 건강 악화"):
     - [HealthLife Herald 기사](https://www.healthlifeherald.com/news/articleView.html?idxno=2542)  
     - [GoodNews1 기사](https://www.goodnews1.com/news/articleView.html?idxno=449373)  
     """)
+
+import streamlit as st
+
+st.title("🌊 해수면 상승, 우리의 선택은?")
+st.write("보고서를 읽은 뒤, 아래 설문에 참여해 주세요!")
+
+# Q1
+st.subheader("1. 지구 평균 기온이 2℃ 상승하면 어떤 일이 벌어질까요?")
+q1 = st.radio(
+    "정답을 선택해보세요:",
+    ["해수면 상승, 해안 도시 침수 위험 증가",
+     "사막 지역의 면적이 줄어듦",
+     "빙하가 더욱 단단해짐"]
+)
+
+if q1 == "해수면 상승, 해안 도시 침수 위험 증가":
+    st.success("정답! 🌍 기후 위기의 주요 결과입니다.")
+elif q1:
+    st.error("아쉽습니다. 다시 생각해 보세요!")
+
+# Q2
+st.subheader("2. 여러분이 생각하는 가장 시급한 대응은 무엇인가요?")
+q2 = st.multiselect(
+    "모두 골라보세요:",
+    ["재생에너지 확대", "플라스틱 사용 줄이기", "해수 담수화 기술 개발", "국제 협력 강화"]
+)
+
+if q2:
+    st.write("✅ 선택한 대응:", ", ".join(q2))
+
+# Q3
+st.subheader("3. 기후변화에 대한 나의 실천 다짐")
+q3 = st.text_input("예: 대중교통 이용하기, 일회용품 줄이기...")
+
+if q3:
+    st.write(f"👍 멋진 다짐이에요: **{q3}**")
+
+# 마지막 메시지
+st.markdown("--")
+st.write("이 설문은 해수면 상승과 기후위기에 대해 스스로 생각해보는 작은 활동입니다.")
